@@ -22,14 +22,14 @@ Trabajo individual. Lo que se evalúa no es cuánto código escribe el agente, s
 
 ## Los archivos
 
-| Archivo | Qué es |
-|---|---|
-| `tareas.py` | Las funciones del gestor. `agregar` ya funciona; `completar`, `eliminar` y `editar` están por implementar. Las reglas de cada una están en su docstring. **Aquí trabajas.** |
-| `test_tareas.py` | Los tests de `agregar`, que sirven de modelo. **Tus tests van aquí.** |
-| `servidor.py` | La vista web local que muestra las tareas en el navegador. No lo modifiques. |
-| `almacen.py` | Guarda las tareas en `tareas.json`. No lo modifiques. |
-| `ai-log.md` | Tu bitácora de IA: una plantilla y un ejemplo. |
-| `.gitignore` | Lo que Git no debe guardar: `tareas.json` y las cachés de Python y pytest. |
+| Archivo          | Qué es                                                                                                                                                                      |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tareas.py`      | Las funciones del gestor. `agregar` ya funciona; `completar`, `eliminar` y `editar` están por implementar. Las reglas de cada una están en su docstring. **Aquí trabajas.** |
+| `test_tareas.py` | Los tests de `agregar`, que sirven de modelo. **Tus tests van aquí.**                                                                                                       |
+| `servidor.py`    | La vista web local que muestra las tareas en el navegador. No lo modifiques.                                                                                                |
+| `almacen.py`     | Guarda las tareas en `tareas.json`. No lo modifiques.                                                                                                                       |
+| `ai-log.md`      | Tu bitácora de IA: una plantilla y un ejemplo.                                                                                                                              |
+| `.gitignore`     | Lo que Git no debe guardar: `tareas.json` y las cachés de Python y pytest.                                                                                                  |
 
 ## Paso 0: mira la app
 
@@ -142,14 +142,14 @@ En `editar` aparece el paso REFACTOR: `editar` necesita las mismas reglas de tí
 
 ## Comandos útiles de OpenCode
 
-| Comando | Para qué sirve |
-|---|---|
-| Shift+Tab | Cambiar entre los agentes Plan y Build |
-| `@archivo` | Adjuntar un archivo al prompt, por ejemplo `@tareas.py` |
-| `!comando` | Ejecutar un comando en la terminal, por ejemplo `!python -m pytest` |
-| `/init` | Crear o actualizar `AGENTS.md` |
-| `/undo` y `/redo` | Deshacer o rehacer el último cambio (Ctrl+X U / Ctrl+X R) |
-| `/compact` | Resumir la sesión cuando se hace larga |
+| Comando           | Para qué sirve                                                      |
+| ----------------- | ------------------------------------------------------------------- |
+| Shift+Tab         | Cambiar entre los agentes Plan y Build                              |
+| `@archivo`        | Adjuntar un archivo al prompt, por ejemplo `@tareas.py`             |
+| `!comando`        | Ejecutar un comando en la terminal, por ejemplo `!python -m pytest` |
+| `/init`           | Crear o actualizar `AGENTS.md`                                      |
+| `/undo` y `/redo` | Deshacer o rehacer el último cambio (Ctrl+X U / Ctrl+X R)           |
+| `/compact`        | Resumir la sesión cuando se hace larga                              |
 
 ## Restricciones
 
@@ -169,10 +169,10 @@ Tu repositorio con:
 
 ## Problemas frecuentes
 
-| Problema | Solución |
-|---|---|
-| El puerto 8000 está ocupado | `python servidor.py 8001` y abre http://127.0.0.1:8001 |
-| `git commit` pide tu identidad | Ejecuta los dos comandos `git config --global` de los requisitos |
-| `No module named pytest` | `python -m pip install pytest` |
-| El navegador no se abre | Abre http://127.0.0.1:8000 a mano |
-| `/undo` no restauró los archivos | Revisa que ejecutaste `git init` y el primer commit |
+| Problema                         | Solución                                                         |
+| -------------------------------- | ---------------------------------------------------------------- |
+| El puerto 8000 está ocupado      | `python servidor.py 8001` y abre http://127.0.0.1:8001           |
+| `git commit` pide tu identidad   | Ejecuta los dos comandos `git config --global` de los requisitos |
+| `No module named pytest`         | `python -m pip install pytest`                                   |
+| El navegador no se abre          | Abre http://127.0.0.1:8000 a mano                                |
+| `/undo` no restauró los archivos | Revisa que ejecutaste `git init` y el primer commit              |
