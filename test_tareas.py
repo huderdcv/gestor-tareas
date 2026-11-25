@@ -7,7 +7,7 @@ antes de implementar cada función.
 
 import pytest
 
-from tareas import agregar, completar, eliminar
+from tareas import agregar, completar, editar, eliminar
 
 
 def test_agregar_devuelve_la_tarea_y_la_pone_al_final():
@@ -128,3 +128,56 @@ def test_eliminar_mensaje_usa_el_id_pedido():
     tareas = [{"id": 1, "titulo": "Estudiar", "hecha": False}]
     with pytest.raises(ValueError, match="No existe la tarea 9"):
         eliminar(tareas, 9)
+
+
+def test_editar_cambia_el_titulo_y_devuelve_la_tarea():
+    tareas = [
+        {"id": 1, "titulo": "Estudiar", "hecha": False},
+        {"id": 2, "titulo": "Leer", "hecha": False},
+    ]
+    tarea = editar(tareas, 1, "Practicar")
+    assert tarea == {"id": 1, "titulo": "Practicar", "hecha": False}
+    assert tareas[0] is tarea
+    assert tareas[1] == {"id": 2, "titulo": "Leer", "hecha": False}
+
+
+def test_editar_quita_los_espacios_de_los_extremos():
+    tareas = [{"id": 1, "titulo": "Estudiar", "hecha": False}]
+    tarea = editar(tareas, 1, "   Estudiar para el parcial  ")
+    assert tarea["titulo"] == "Estudiar para el parcial"
+
+
+def test_editar_titulo_vacio_da_error():
+    tareas = [{"id": 1, "titulo": "Estudiar", "hecha": False}]
+    with pytest.raises(ValueError, match="El título no puede estar vacío"):
+        editar(tareas, 1, "    ")
+    assert tareas == [{"id": 1, "titulo": "Estudiar", "hecha": False}]
+
+
+def test_editar_acepta_un_titulo_de_80_caracteres():
+    tareas = [{"id": 1, "titulo": "Estudiar", "hecha": False}]
+    tarea = editar(tareas, 1, "a" * 80)
+    assert tarea["titulo"] == "a" * 80
+
+
+def test_editar_titulo_de_81_caracteres_da_error():
+    tareas = [{"id": 1, "titulo": "Estudiar", "hecha": False}]
+    with pytest.raises(ValueError, match="El título no puede superar 80 caracteres"):
+        editar(tareas, 1, "a" * 81)
+    assert tareas == [{"id": 1, "titulo": "Estudiar", "hecha": False}]
+
+
+def test_editar_id_inexistente_da_error():
+    tareas = [{"id": 1, "titulo": "Estudiar", "hecha": False}]
+    with pytest.raises(ValueError, match="No existe la tarea 7"):
+        editar(tareas, 7, "Leer")
+    assert tareas == [{"id": 1, "titulo": "Estudiar", "hecha": False}]
+
+
+def test_editar_no_cambia_si_la_tarea_esta_hecha():
+    tareas = [
+        {"id": 1, "titulo": "Estudiar", "hecha": True},
+        {"id": 2, "titulo": "Leer", "hecha": False},
+    ]
+    assert editar(tareas, 1, "Practicar")["hecha"] is True
+    assert editar(tareas, 2, "Correr")["hecha"] is False

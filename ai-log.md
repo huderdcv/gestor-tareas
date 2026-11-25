@@ -153,3 +153,57 @@ Copia este bloque para cada entrada nueva:
   ejecuté yo el comando manualmente y obtuve el mismo resultado; revisé el cambio y
   comprobé que no se modificaron otros archivos; verifiqué la funcionalidad en el
   navegador con `python servidor.py` y el botón **Eliminar**.
+
+### Entrada 8
+
+- **Fecha:** 2026-11-25
+- **Paso del laboratorio:** RED de `editar`
+- **Prompt clave (literal):**
+  > implementar los tests de tu plan para la funcion de editar. que sigan el mismo estilo
+  > de los tests ya implementados
+- **Qué propuso el agente:** 7 tests con el estilo existente: cambia el título y devuelve
+  la tarea, quita espacios de los extremos, título vacío, límite de 80 caracteres, 81
+  caracteres, id inexistente y `hecha` conservada. Amplió el import a
+  `from tareas import agregar, completar, editar, eliminar`. Único ajuste respecto al
+  plan: en vez de `parametrize`, el test de `hecha` comprueba `True` y `False` con dos
+  `assert`, para no introducir un patrón ausente en el resto de los tests.
+- **Decisión:** aceptado sin cambios. Un test por regla del docstring, mismo estilo y sin
+  tocar `tareas.py`.
+- **Cómo lo verifiqué:** el agente ejecutó `python -m pytest` → 7 failed con
+  `NotImplementedError` y 16 passed; después ejecuté yo el comando manualmente y obtuve
+  el mismo resultado; revisé los tests y los comparé con las reglas del docstring, y
+  comprobé que solo se modificó `test_tareas.py`.
+
+### Entrada 9
+
+- **Fecha:** 2026-11-25
+- **Paso del laboratorio:** GREEN de `editar`
+- **Prompt clave (literal):**
+  > vamos por la fase green. implementa la funcion editar en tareas.py con lo minimo
+  > necesario para que sus respectivas pruebas pasen. no toques los tests.
+- **Qué propuso el agente:** validar el título con las mismas tres reglas de `agregar()`
+  (duplicadas a propósito, por ser lo mínimo), buscar la tarea por id, asignar el título
+  limpio y devolverla; si no existe, `ValueError(f"No existe la tarea {id_tarea}")`. No
+  modificó `hecha` ni los tests.
+- **Decisión:** aceptado sin cambios. La duplicación de la validación queda para el paso
+  REFACTOR.
+- **Cómo lo verifiqué:** el agente ejecutó `python -m pytest` → 23 passed; después ejecuté
+  yo el comando manualmente y obtuve el mismo resultado; revisé el cambio y comprobé que
+  solo se modificó `tareas.py`.
+
+### Entrada 10
+
+- **Fecha:** 2026-11-25
+- **Paso del laboratorio:** refactor (validación de título compartida)
+- **Prompt clave (literal):**
+  > fase refactor: refactoriza la funcion de editar para extraer en una sola funcion las
+  > reglas de titulo que comparte con la funcion de agregar
+- **Qué propuso el agente:** extraer `validar_titulo(titulo)`, que aplica `strip`, rechaza
+  el título vacío y el de más de 80 caracteres, y devuelve el título limpio; `agregar()` y
+  `editar()` la usan en lugar de repetir las reglas.
+- **Decisión:** aceptado sin cambios. La función devuelve el título limpio porque ambos
+  llamadores necesitan ese valor, y conserva los mensajes exactos que comparan los tests.
+- **Cómo lo verifiqué:** el agente ejecutó `python -m pytest` → 23 passed; después ejecuté
+  yo el comando manualmente y obtuve el mismo resultado; revisé `git diff` y solo cambió
+  `tareas.py`, sin tocar los tests ni los mensajes de error; verifiqué en el navegador el
+  funcionamiento de cada función refactorizada, **Agregar** y **Editar**.
