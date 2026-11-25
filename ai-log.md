@@ -103,3 +103,17 @@ Copia este bloque para cada entrada nueva:
   ejecuté yo el comando manualmente y obtuve el mismo resultado; revisé `git diff` y solo
   cambió el cuerpo de `completar()`; recargué la página con `python servidor.py` y al
   pulsar **Completar** la tarea aparece tachada en verde.
+
+### Entrada 5
+
+- **Fecha:** 2026-11-25
+- **Paso del laboratorio:** deshacer (paso 5)
+- **Prompt clave (literal):**
+  > Traduce al inglés todos los mensajes de error de tareas.py
+- **Qué propuso el agente:** tradujo al inglés los `ValueError` de las funciones ya
+  implementadas y ejecutó los tests, que fallaron porque comparan los mensajes exactos
+  en español.
+- **Decisión:** rechazado. Los mensajes de error son el contrato que comparan los tests;
+  el cambio se deshizo con `/undo`.
+- **Cómo lo verifiqué:** revisé los mensajes de `tareas.py` y `git diff`, ejecuté `/undo`
+  y comprobé con `git status` que `tareas.py` ya no aparecía como modificado.
