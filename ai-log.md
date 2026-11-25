@@ -117,3 +117,39 @@ Copia este bloque para cada entrada nueva:
   el cambio se deshizo con `/undo`.
 - **Cómo lo verifiqué:** revisé los mensajes de `tareas.py` y `git diff`, ejecuté `/undo`
   y comprobé con `git status` que `tareas.py` ya no aparecía como modificado.
+
+### Entrada 6
+
+- **Fecha:** 2026-11-25
+- **Paso del laboratorio:** RED de `eliminar`
+- **Prompt clave (literal):**
+  > implementa los test para la funcion eliminar en test_tareas.py. que tengan el mismo
+  > estilo de los tests ya implementados.
+- **Qué propuso el agente:** 4 tests con el estilo existente: quita la tarea y la
+  devuelve, los ids de las demás no cambian, id inexistente con el mensaje exacto y lista
+  intacta, y mensaje con el id pedido. Amplió el import a
+  `from tareas import agregar, completar, eliminar`.
+- **Decisión:** aceptado sin cambios. Un test por regla del docstring, mismo estilo y sin
+  tocar `tareas.py`.
+- **Cómo lo verifiqué:** el agente ejecutó `python -m pytest` → 4 failed con
+  `NotImplementedError` y 12 passed; después ejecuté yo el comando manualmente y obtuve
+  el mismo resultado; revisé los tests y los comparé con las reglas del docstring, y
+  comprobé que solo se modificó `test_tareas.py`, ningún otro archivo.
+
+### Entrada 7
+
+- **Fecha:** 2026-11-25
+- **Paso del laboratorio:** GREEN de `eliminar`
+- **Prompt clave (literal):**
+  > implementa la funcion eliminar en tareas.py para que sus respectivos tests pasen. no
+  > modifiques los tests
+- **Qué propuso el agente:** recorrer la lista con `enumerate`, devolver
+  `tareas.pop(indice)` al encontrar el id y, si no existe, lanzar
+  `ValueError(f"No existe la tarea {id_tarea}")`. Al no reasignar ids, las demás tareas
+  los conservan.
+- **Decisión:** aceptado sin cambios. Implementación mínima que cumple las dos reglas del
+  docstring, con el mismo estilo que `completar()`.
+- **Cómo lo verifiqué:** el agente ejecutó `python -m pytest` → 16 passed; después
+  ejecuté yo el comando manualmente y obtuve el mismo resultado; revisé el cambio y
+  comprobé que no se modificaron otros archivos; verifiqué la funcionalidad en el
+  navegador con `python servidor.py` y el botón **Eliminar**.
